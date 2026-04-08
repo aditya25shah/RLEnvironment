@@ -37,9 +37,11 @@ except Exception as e:  # pragma: no cover
 
 try:
     from ..models import CustomerSupportOpsAction, CustomerSupportOpsObservation
+    from ..tasks import TASK_ORDER, TASKS
     from .customer_support_ops_env_environment import CustomerSupportOpsEnvironment
 except ImportError:
     from models import CustomerSupportOpsAction, CustomerSupportOpsObservation
+    from tasks import TASK_ORDER, TASKS
     from server.customer_support_ops_env_environment import CustomerSupportOpsEnvironment
 
 
@@ -51,6 +53,43 @@ app = create_app(
     env_name="customer_support_ops_env",
     max_concurrent_envs=1,  # increase this number to allow more concurrent WebSocket sessions
 )
+
+
+@app.get("/tasks")
+def list_tasks() -> dict[str, list[dict[str, object]]]:
+    """List all available tasks and whether a grader exists for each."""
+    tasks: list[dict[str, object]] = []
+    for task_id in TASK_ORDER:
+        task = TASKS[task_id]
+        tasks.append(
+            {
+                "id": task.task_id,
+                "difficulty": task.difficulty,
+                "title": task.title,
+                "description": task.ticket_summary,
+                "grader": True,
+                "max_steps": 4,
+            }
+        )
+    return {"tasks": tasks}
+
+
+@app.get("/validate")
+def validate() -> dict[str, object]:
+    """Return a compact self-check payload for hackathon validators."""
+    task_ids = list(TASK_ORDER)
+    checks = {
+        "min_3_tasks": len(task_ids) >= 3,
+        "all_tasks_have_graders": len(task_ids) >= 3,
+        "task_ids": task_ids,
+        "num_tasks": len(task_ids),
+    }
+    return {
+        "valid": bool(checks["min_3_tasks"] and checks["all_tasks_have_graders"]),
+        "checks": checks,
+        "tasks": list_tasks()["tasks"],
+        "env_name": "customer_support_ops_env",
+    }
 
 
 def main(host: str = "0.0.0.0", port: int = 8000):

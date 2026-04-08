@@ -193,6 +193,11 @@ response = requests.post(
 print(response.json())
 ```
 
+Validation-friendly endpoints:
+
+- `GET /tasks`: lists all available tasks and marks each as having a grader
+- `GET /validate`: returns a compact self-check payload with task counts
+
 ## Deployment
 
 Validate locally:
@@ -218,3 +223,4 @@ openenv push .
 - `server/app.py`: FastAPI and OpenEnv server entrypoint
 - `Dockerfile`: deployment image for Hugging Face Spaces
 - `openenv.yaml`: environment manifest
+"# RLEnvironment" 
