@@ -1,0 +1,11 @@
+{
+  "task_id": "hard_account_takeover",
+  "difficulty": "hard",
+  "title": "Account takeover with fraudulent purchases",
+  "grader": "grade_hard_account_takeover",
+  "constraints": [
+    "Treat account takeover as urgent security work.",
+    "Escalate to the security team instead of resolving directly with a refund.",
+    "Reply should confirm account lock, escalation, and next-step guidance."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "task_id": "easy_refund_renewal",
+  "difficulty": "easy",
+  "title": "Billing refund for accidental renewal",
+  "grader": "grade_easy_refund_renewal",
+  "constraints": [
+    "Route billing cases to the billing queue.",
+    "Use high priority for customer-impacting billing errors.",
+    "Reply should confirm the refund amount and timeframe."
+  ]
+}
