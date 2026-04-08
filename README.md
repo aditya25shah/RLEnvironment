@@ -26,6 +26,12 @@ The environment is live on Hugging Face:
 - `medium_replacement_delay`: urgent replacement for a VIP fulfillment mistake
 - `hard_account_takeover`: urgent security escalation for an account takeover
 
+Explicit task-to-grader mapping:
+
+- `easy_refund_renewal` -> `grade_easy_refund_renewal`
+- `medium_replacement_delay` -> `grade_medium_replacement_delay`
+- `hard_account_takeover` -> `grade_hard_account_takeover`
+
 ## Action Model
 
 Each `CustomerSupportOpsAction` supports these fields:
