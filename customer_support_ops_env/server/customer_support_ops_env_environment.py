@@ -13,11 +13,11 @@ from uuid import uuid4
 from openenv.core.env_server.interfaces import Environment
 
 try:
-    from ..graders import WorkspaceSnapshot, grade_workspace
+    from ..graders import TASK_GRADERS, WorkspaceSnapshot, grade_task
     from ..models import CustomerSupportOpsAction, CustomerSupportOpsObservation, CustomerSupportOpsState
     from ..tasks import TASK_ORDER, get_task, select_task_by_seed
 except ImportError:
-    from graders import WorkspaceSnapshot, grade_workspace
+    from graders import TASK_GRADERS, WorkspaceSnapshot, grade_task
     from models import CustomerSupportOpsAction, CustomerSupportOpsObservation, CustomerSupportOpsState
     from tasks import TASK_ORDER, get_task, select_task_by_seed
 
@@ -95,7 +95,7 @@ class CustomerSupportOpsEnvironment(
             self._state.resolved = action.mark_resolved
             step_feedback.append("Resolution fields updated.")
 
-        grade = grade_workspace(self._task, self._snapshot())
+        grade = grade_task(self._task, self._snapshot())
         self._state.progress_score = grade.total_score
 
         reward = round(max(0.0, grade.total_score - previous_score), 4)
@@ -162,6 +162,7 @@ class CustomerSupportOpsEnvironment(
                 "title": self._task.title,
                 "constraints": self._task.constraints,
                 "expected_resolution_family": self._task.expectation.resolution_code,
+                "grader_name": TASK_GRADERS[self._task.task_id].__name__,
                 "step_count": self._state.step_count,
                 "max_steps": self._state.max_steps,
             },

@@ -36,10 +36,12 @@ except Exception as e:  # pragma: no cover
     ) from e
 
 try:
+    from ..graders import TASK_GRADERS
     from ..models import CustomerSupportOpsAction, CustomerSupportOpsObservation
     from ..tasks import TASK_ORDER, TASKS
     from .customer_support_ops_env_environment import CustomerSupportOpsEnvironment
 except ImportError:
+    from graders import TASK_GRADERS
     from models import CustomerSupportOpsAction, CustomerSupportOpsObservation
     from tasks import TASK_ORDER, TASKS
     from server.customer_support_ops_env_environment import CustomerSupportOpsEnvironment
@@ -68,6 +70,7 @@ def list_tasks() -> dict[str, list[dict[str, object]]]:
                 "title": task.title,
                 "description": task.ticket_summary,
                 "grader": True,
+                "grader_name": TASK_GRADERS[task.task_id].__name__,
                 "max_steps": 4,
             }
         )
