@@ -193,6 +193,11 @@ response = requests.post(
 print(response.json())
 ```
 
+Validation-friendly endpoints:
+
+- `GET /tasks`: lists all available tasks and marks each as having a grader
+- `GET /validate`: returns a compact self-check payload with task counts
+
 ## Deployment
 
 Validate locally:
