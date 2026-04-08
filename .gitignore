@@ -1,0 +1,7 @@
+.agents/
+.codex/
+venv/
+__pycache__/
+*.pyc
+customer_support_ops_env/__pycache__/
+customer_support_ops_env/server/__pycache__/
