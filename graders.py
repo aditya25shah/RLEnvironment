@@ -169,3 +169,37 @@ def grade_workspace(task: SupportTask, snapshot: WorkspaceSnapshot) -> GradeResu
         feedback=feedback,
         remaining_objectives=remaining,
     )
+
+
+def grade_easy_refund_renewal(
+    task: SupportTask, snapshot: WorkspaceSnapshot
+) -> GradeResult:
+    """Task-specific grader for easy_refund_renewal."""
+    return grade_workspace(task, snapshot)
+
+
+def grade_medium_replacement_delay(
+    task: SupportTask, snapshot: WorkspaceSnapshot
+) -> GradeResult:
+    """Task-specific grader for medium_replacement_delay."""
+    return grade_workspace(task, snapshot)
+
+
+def grade_hard_account_takeover(
+    task: SupportTask, snapshot: WorkspaceSnapshot
+) -> GradeResult:
+    """Task-specific grader for hard_account_takeover."""
+    return grade_workspace(task, snapshot)
+
+
+TASK_GRADERS = {
+    "easy_refund_renewal": grade_easy_refund_renewal,
+    "medium_replacement_delay": grade_medium_replacement_delay,
+    "hard_account_takeover": grade_hard_account_takeover,
+}
+
+
+def grade_task(task: SupportTask, snapshot: WorkspaceSnapshot) -> GradeResult:
+    """Dispatch to the explicit grader for the current task."""
+    grader = TASK_GRADERS[task.task_id]
+    return grader(task, snapshot)
