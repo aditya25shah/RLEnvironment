@@ -5,6 +5,7 @@
     {
       "id": "easy_refund_renewal",
       "difficulty": "easy",
+      "has_grader": true,
       "grader": "graders.easy_refund_renewal:grade",
       "grader_name": "grade_easy_refund_renewal",
       "grader_module": "graders.easy_refund_renewal",
@@ -13,6 +14,7 @@
     {
       "id": "medium_replacement_delay",
       "difficulty": "medium",
+      "has_grader": true,
       "grader": "graders.medium_replacement_delay:grade",
       "grader_name": "grade_medium_replacement_delay",
       "grader_module": "graders.medium_replacement_delay",
@@ -21,6 +23,7 @@
     {
       "id": "hard_account_takeover",
       "difficulty": "hard",
+      "has_grader": true,
       "grader": "graders.hard_account_takeover:grade",
       "grader_name": "grade_hard_account_takeover",
       "grader_module": "graders.hard_account_takeover",

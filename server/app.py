@@ -70,6 +70,7 @@ def _task_rows() -> list[dict[str, object]]:
                 "difficulty": task.difficulty,
                 "title": task.title,
                 "description": task.ticket_summary,
+                "has_grader": True,
                 "grader": task.grader_path,
                 "grader_name": task.grader_name,
                 "grader_module": task.grader_module,

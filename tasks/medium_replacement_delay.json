@@ -1,6 +1,7 @@
 {
   "task_id": "medium_replacement_delay",
   "id": "medium_replacement_delay",
+  "has_grader": true,
   "difficulty": "medium",
   "title": "Replacement for VIP shipment error",
   "grader": "graders.medium_replacement_delay:grade",

@@ -4,6 +4,7 @@
     {
       "task_id": "easy_refund_renewal",
       "id": "easy_refund_renewal",
+      "has_grader": true,
       "grader": "graders.easy_refund_renewal:grade",
       "grader_name": "grade_easy_refund_renewal",
       "grader_module": "graders.easy_refund_renewal",
@@ -14,6 +15,7 @@
     {
       "task_id": "medium_replacement_delay",
       "id": "medium_replacement_delay",
+      "has_grader": true,
       "grader": "graders.medium_replacement_delay:grade",
       "grader_name": "grade_medium_replacement_delay",
       "grader_module": "graders.medium_replacement_delay",
@@ -24,6 +26,7 @@
     {
       "task_id": "hard_account_takeover",
       "id": "hard_account_takeover",
+      "has_grader": true,
       "grader": "graders.hard_account_takeover:grade",
       "grader_name": "grade_hard_account_takeover",
       "grader_module": "graders.hard_account_takeover",

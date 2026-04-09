@@ -1,6 +1,7 @@
 {
   "task_id": "easy_refund_renewal",
   "id": "easy_refund_renewal",
+  "has_grader": true,
   "difficulty": "easy",
   "title": "Billing refund for accidental renewal",
   "grader": "graders.easy_refund_renewal:grade",
