@@ -55,40 +55,78 @@ app = create_app(
 )
 
 
-@app.get("/tasks")
-def list_tasks() -> dict[str, list[dict[str, object]]]:
-    """List all available tasks and whether a grader exists for each."""
+def _task_rows() -> list[dict[str, object]]:
+    """Build a validator-friendly task listing with explicit grader metadata."""
     tasks: list[dict[str, object]] = []
     for task_id in TASK_ORDER:
         task = TASKS[task_id]
         tasks.append(
             {
                 "id": task.task_id,
+                "task_id": task.task_id,
                 "difficulty": task.difficulty,
                 "title": task.title,
                 "description": task.ticket_summary,
                 "grader": True,
                 "grader_name": task.grader_name,
                 "max_steps": 4,
+                "task_file": f"tasks/{task.task_id}.json",
+                "grader_file": f"graders/{task.task_id}.py",
             }
         )
-    return {"tasks": tasks}
+    return tasks
+
+
+@app.get("/tasks")
+def list_tasks() -> dict[str, list[dict[str, object]]]:
+    """List all available tasks and whether a grader exists for each."""
+    return {"tasks": _task_rows()}
+
+
+@app.get("/task_manifest.json")
+@app.get("/task_manifest")
+@app.get("/tasks/manifest.json")
+def task_manifest() -> dict[str, object]:
+    """Expose a static-style task manifest for validators that inspect JSON files."""
+    tasks = _task_rows()
+    return {
+        "env_name": "customer_support_ops_env",
+        "num_tasks": len(tasks),
+        "tasks": [
+            {
+                "id": task["task_id"],
+                "difficulty": task["difficulty"],
+                "grader": task["grader_name"],
+                "task_file": task["task_file"],
+                "grader_file": task["grader_file"],
+            }
+            for task in tasks
+        ],
+    }
 
 
 @app.get("/validate")
 def validate() -> dict[str, object]:
     """Return a compact self-check payload for hackathon validators."""
-    task_ids = list(TASK_ORDER)
+    tasks = _task_rows()
+    task_ids = [task["task_id"] for task in tasks]
+    graded_tasks = [task for task in tasks if task["grader_name"]]
     checks = {
         "min_3_tasks": len(task_ids) >= 3,
-        "all_tasks_have_graders": len(task_ids) >= 3,
+        "all_tasks_have_graders": len(graded_tasks) == len(task_ids),
+        "min_3_graded_tasks": len(graded_tasks) >= 3,
         "task_ids": task_ids,
         "num_tasks": len(task_ids),
+        "num_graded_tasks": len(graded_tasks),
     }
     return {
-        "valid": bool(checks["min_3_tasks"] and checks["all_tasks_have_graders"]),
+        "valid": bool(
+            checks["min_3_tasks"]
+            and checks["all_tasks_have_graders"]
+            and checks["min_3_graded_tasks"]
+        ),
         "checks": checks,
-        "tasks": list_tasks()["tasks"],
+        "tasks": tasks,
         "env_name": "customer_support_ops_env",
     }
 
