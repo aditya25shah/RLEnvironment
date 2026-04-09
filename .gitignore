@@ -1,3 +1,11 @@
 __pycache__/
 server/__pycache__/
 *.pyc
+.venv/
+venv/
+.agents/
+.codex/
+*.pyo
+*.egg-info/
+outputs/*
+!outputs/.gitkeep
