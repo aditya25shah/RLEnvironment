@@ -39,6 +39,10 @@ class SupportTask:
     grader_module: str
     grader_function: str
 
+    @property
+    def grader_path(self) -> str:
+        return f"{self.grader_module}:{self.grader_function}"
+
 
 TASKS: Dict[str, SupportTask] = {
     "easy_refund_renewal": SupportTask(

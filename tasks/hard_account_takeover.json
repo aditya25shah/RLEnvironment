@@ -3,7 +3,8 @@
   "id": "hard_account_takeover",
   "difficulty": "hard",
   "title": "Account takeover with fraudulent purchases",
-  "grader": "grade_hard_account_takeover",
+  "grader": "graders.hard_account_takeover:grade",
+  "grader_name": "grade_hard_account_takeover",
   "grader_module": "graders.hard_account_takeover",
   "grader_function": "grade",
   "constraints": [

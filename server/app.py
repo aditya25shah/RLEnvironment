@@ -70,13 +70,14 @@ def _task_rows() -> list[dict[str, object]]:
                 "difficulty": task.difficulty,
                 "title": task.title,
                 "description": task.ticket_summary,
-                "grader": {
-                    "module": task.grader_module,
-                    "function": task.grader_function,
-                },
+                "grader": task.grader_path,
                 "grader_name": task.grader_name,
                 "grader_module": task.grader_module,
                 "grader_function": task.grader_function,
+                "grader_spec": {
+                    "module": task.grader_module,
+                    "function": task.grader_function,
+                },
                 "max_steps": 4,
                 "task_file": f"tasks/{task.task_id}.json",
                 "grader_file": f"graders/{task.task_id}.py",
