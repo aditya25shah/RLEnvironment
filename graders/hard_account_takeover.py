@@ -5,4 +5,6 @@ try:
 except ImportError:
     from graders import grade_hard_account_takeover
 
-__all__ = ["grade_hard_account_takeover"]
+grade = grade_hard_account_takeover
+
+__all__ = ["grade", "grade_hard_account_takeover"]

@@ -5,4 +5,6 @@ try:
 except ImportError:
     from graders import grade_medium_replacement_delay
 
-__all__ = ["grade_medium_replacement_delay"]
+grade = grade_medium_replacement_delay
+
+__all__ = ["grade", "grade_medium_replacement_delay"]

@@ -5,4 +5,6 @@ try:
 except ImportError:
     from graders import grade_easy_refund_renewal
 
-__all__ = ["grade_easy_refund_renewal"]
+grade = grade_easy_refund_renewal
+
+__all__ = ["grade", "grade_easy_refund_renewal"]
