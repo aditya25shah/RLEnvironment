@@ -28,6 +28,9 @@ Usage:
     python -m server.app
 """
 
+import json
+from pathlib import Path
+
 try:
     from openenv.core.env_server.http_server import create_app
 except Exception as e:  # pragma: no cover
@@ -67,14 +70,24 @@ def _task_rows() -> list[dict[str, object]]:
                 "difficulty": task.difficulty,
                 "title": task.title,
                 "description": task.ticket_summary,
-                "grader": True,
+                "grader": {
+                    "module": task.grader_module,
+                    "function": task.grader_function,
+                },
                 "grader_name": task.grader_name,
+                "grader_module": task.grader_module,
+                "grader_function": task.grader_function,
                 "max_steps": 4,
                 "task_file": f"tasks/{task.task_id}.json",
                 "grader_file": f"graders/{task.task_id}.py",
             }
         )
     return tasks
+
+
+def _load_manifest(relative_path: str) -> dict[str, object]:
+    manifest_path = Path(__file__).resolve().parents[1] / relative_path
+    return json.loads(manifest_path.read_text(encoding="utf-8"))
 
 
 @app.get("/tasks")
@@ -88,21 +101,13 @@ def list_tasks() -> dict[str, list[dict[str, object]]]:
 @app.get("/tasks/manifest.json")
 def task_manifest() -> dict[str, object]:
     """Expose a static-style task manifest for validators that inspect JSON files."""
-    tasks = _task_rows()
-    return {
-        "env_name": "customer_support_ops_env",
-        "num_tasks": len(tasks),
-        "tasks": [
-            {
-                "id": task["task_id"],
-                "difficulty": task["difficulty"],
-                "grader": task["grader_name"],
-                "task_file": task["task_file"],
-                "grader_file": task["grader_file"],
-            }
-            for task in tasks
-        ],
-    }
+    return _load_manifest("task_manifest.json")
+
+
+@app.get("/tasks/{task_id}.json")
+def task_json(task_id: str) -> dict[str, object]:
+    """Expose task JSON files directly for validators that fetch them over HTTP."""
+    return _load_manifest(f"tasks/{task_id}.json")
 
 
 @app.get("/validate")

@@ -36,6 +36,8 @@ class SupportTask:
     constraints: List[str]
     expectation: TaskExpectation
     grader_name: str
+    grader_module: str
+    grader_function: str
 
 
 TASKS: Dict[str, SupportTask] = {
@@ -66,6 +68,8 @@ TASKS: Dict[str, SupportTask] = {
             escalate=False,
         ),
         grader_name="grade_easy_refund_renewal",
+        grader_module="graders.easy_refund_renewal",
+        grader_function="grade",
     ),
     "medium_replacement_delay": SupportTask(
         task_id="medium_replacement_delay",
@@ -97,6 +101,8 @@ TASKS: Dict[str, SupportTask] = {
             escalate=False,
         ),
         grader_name="grade_medium_replacement_delay",
+        grader_module="graders.medium_replacement_delay",
+        grader_function="grade",
     ),
     "hard_account_takeover": SupportTask(
         task_id="hard_account_takeover",
@@ -128,6 +134,8 @@ TASKS: Dict[str, SupportTask] = {
             escalate=True,
         ),
         grader_name="grade_hard_account_takeover",
+        grader_module="graders.hard_account_takeover",
+        grader_function="grade",
     ),
 }
 
@@ -140,7 +148,12 @@ TASK_ORDER: List[str] = [
 
 
 TASKS_WITH_GRADERS: List[dict[str, str]] = [
-    {"task_id": TASKS[task_id].task_id, "grader_name": TASKS[task_id].grader_name}
+    {
+        "task_id": TASKS[task_id].task_id,
+        "grader_name": TASKS[task_id].grader_name,
+        "grader_module": TASKS[task_id].grader_module,
+        "grader_function": TASKS[task_id].grader_function,
+    }
     for task_id in TASK_ORDER
 ]
 
