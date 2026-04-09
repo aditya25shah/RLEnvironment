@@ -1,0 +1,11 @@
+{
+  "task_id": "medium_replacement_delay",
+  "difficulty": "medium",
+  "title": "Replacement for VIP shipment error",
+  "grader": "grade_medium_replacement_delay",
+  "constraints": [
+    "Route shipping and warehouse issues to fulfillment.",
+    "Use urgent priority when the failure blocks an imminent event.",
+    "Reply should promise overnight replacement and confirm no return is needed first."
+  ]
+}

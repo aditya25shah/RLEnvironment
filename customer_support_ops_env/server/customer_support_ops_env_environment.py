@@ -13,11 +13,11 @@ from uuid import uuid4
 from openenv.core.env_server.interfaces import Environment
 
 try:
-    from ..graders import TASK_GRADERS, WorkspaceSnapshot, grade_task
+    from ..graders import WorkspaceSnapshot, grade_task
     from ..models import CustomerSupportOpsAction, CustomerSupportOpsObservation, CustomerSupportOpsState
     from ..tasks import TASK_ORDER, get_task, select_task_by_seed
 except ImportError:
-    from graders import TASK_GRADERS, WorkspaceSnapshot, grade_task
+    from graders import WorkspaceSnapshot, grade_task
     from models import CustomerSupportOpsAction, CustomerSupportOpsObservation, CustomerSupportOpsState
     from tasks import TASK_ORDER, get_task, select_task_by_seed
 
@@ -162,7 +162,7 @@ class CustomerSupportOpsEnvironment(
                 "title": self._task.title,
                 "constraints": self._task.constraints,
                 "expected_resolution_family": self._task.expectation.resolution_code,
-                "grader_name": TASK_GRADERS[self._task.task_id].__name__,
+                "grader_name": self._task.grader_name,
                 "step_count": self._state.step_count,
                 "max_steps": self._state.max_steps,
             },

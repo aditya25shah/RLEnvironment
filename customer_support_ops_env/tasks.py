@@ -35,6 +35,7 @@ class SupportTask:
     policy_summary: str
     constraints: List[str]
     expectation: TaskExpectation
+    grader_name: str
 
 
 TASKS: Dict[str, SupportTask] = {
@@ -64,6 +65,7 @@ TASKS: Dict[str, SupportTask] = {
             refund_amount=120.0,
             escalate=False,
         ),
+        grader_name="grade_easy_refund_renewal",
     ),
     "medium_replacement_delay": SupportTask(
         task_id="medium_replacement_delay",
@@ -94,6 +96,7 @@ TASKS: Dict[str, SupportTask] = {
             refund_amount=0.0,
             escalate=False,
         ),
+        grader_name="grade_medium_replacement_delay",
     ),
     "hard_account_takeover": SupportTask(
         task_id="hard_account_takeover",
@@ -124,6 +127,7 @@ TASKS: Dict[str, SupportTask] = {
             refund_amount=0.0,
             escalate=True,
         ),
+        grader_name="grade_hard_account_takeover",
     ),
 }
 
@@ -132,6 +136,12 @@ TASK_ORDER: List[str] = [
     "easy_refund_renewal",
     "medium_replacement_delay",
     "hard_account_takeover",
+]
+
+
+TASKS_WITH_GRADERS: List[dict[str, str]] = [
+    {"task_id": TASKS[task_id].task_id, "grader_name": TASKS[task_id].grader_name}
+    for task_id in TASK_ORDER
 ]
 
 

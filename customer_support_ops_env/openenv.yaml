@@ -4,4 +4,15 @@ type: space
 runtime: fastapi
 app: server.app:app
 port: 8000
-
+metadata:
+  description: Deterministic customer support operations environment with 3 graded tasks
+  tasks:
+    - id: easy_refund_renewal
+      difficulty: easy
+      grader: grade_easy_refund_renewal
+    - id: medium_replacement_delay
+      difficulty: medium
+      grader: grade_medium_replacement_delay
+    - id: hard_account_takeover
+      difficulty: hard
+      grader: grade_hard_account_takeover
