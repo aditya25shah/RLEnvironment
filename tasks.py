@@ -72,7 +72,7 @@ TASKS: Dict[str, SupportTask] = {
             escalate=False,
         ),
         grader_name="grade_easy_refund_renewal",
-        grader_module="tasks.easy_refund_renewal.grader",
+        grader_module="graders.easy_refund_renewal",
         grader_function="grade",
     ),
     "medium_replacement_delay": SupportTask(
@@ -105,7 +105,7 @@ TASKS: Dict[str, SupportTask] = {
             escalate=False,
         ),
         grader_name="grade_medium_replacement_delay",
-        grader_module="tasks.medium_replacement_delay.grader",
+        grader_module="graders.medium_replacement_delay",
         grader_function="grade",
     ),
     "hard_account_takeover": SupportTask(
@@ -138,7 +138,7 @@ TASKS: Dict[str, SupportTask] = {
             escalate=True,
         ),
         grader_name="grade_hard_account_takeover",
-        grader_module="tasks.hard_account_takeover.grader",
+        grader_module="graders.hard_account_takeover",
         grader_function="grade",
     ),
 }
