@@ -1,0 +1,10 @@
+{
+  "id": "hard_account_takeover",
+  "task_id": "hard_account_takeover",
+  "difficulty": "hard",
+  "title": "Account takeover with fraudulent purchases",
+  "grader": "tasks.hard_account_takeover.grader:grade",
+  "grader_name": "grade_hard_account_takeover",
+  "grader_module": "tasks.hard_account_takeover.grader",
+  "grader_function": "grade"
+}

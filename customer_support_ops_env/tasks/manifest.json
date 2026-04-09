@@ -1,0 +1,35 @@
+{
+  "num_tasks": 3,
+  "tasks": [
+    {
+      "task_id": "easy_refund_renewal",
+      "id": "easy_refund_renewal",
+      "grader": "tasks.easy_refund_renewal.grader:grade",
+      "grader_name": "grade_easy_refund_renewal",
+      "grader_module": "tasks.easy_refund_renewal.grader",
+      "grader_function": "grade",
+      "task_file": "tasks/easy_refund_renewal/task.json",
+      "grader_file": "tasks/easy_refund_renewal/grader.py"
+    },
+    {
+      "task_id": "medium_replacement_delay",
+      "id": "medium_replacement_delay",
+      "grader": "tasks.medium_replacement_delay.grader:grade",
+      "grader_name": "grade_medium_replacement_delay",
+      "grader_module": "tasks.medium_replacement_delay.grader",
+      "grader_function": "grade",
+      "task_file": "tasks/medium_replacement_delay/task.json",
+      "grader_file": "tasks/medium_replacement_delay/grader.py"
+    },
+    {
+      "task_id": "hard_account_takeover",
+      "id": "hard_account_takeover",
+      "grader": "tasks.hard_account_takeover.grader:grade",
+      "grader_name": "grade_hard_account_takeover",
+      "grader_module": "tasks.hard_account_takeover.grader",
+      "grader_function": "grade",
+      "task_file": "tasks/hard_account_takeover/task.json",
+      "grader_file": "tasks/hard_account_takeover/grader.py"
+    }
+  ]
+}

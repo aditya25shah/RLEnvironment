@@ -3,9 +3,9 @@
   "id": "hard_account_takeover",
   "difficulty": "hard",
   "title": "Account takeover with fraudulent purchases",
-  "grader": "graders.hard_account_takeover:grade",
+  "grader": "tasks.hard_account_takeover.grader:grade",
   "grader_name": "grade_hard_account_takeover",
-  "grader_module": "graders.hard_account_takeover",
+  "grader_module": "tasks.hard_account_takeover.grader",
   "grader_function": "grade",
   "constraints": [
     "Treat account takeover as urgent security work.",

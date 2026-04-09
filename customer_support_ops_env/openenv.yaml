@@ -15,7 +15,7 @@ tasks:
     difficulty: easy
     max_steps: 4
     grader:
-      module: graders.easy_refund_renewal
+      module: tasks.easy_refund_renewal.grader
       function: grade
   - id: medium_replacement_delay
     name: Replacement for VIP shipment error
@@ -23,7 +23,7 @@ tasks:
     difficulty: medium
     max_steps: 4
     grader:
-      module: graders.medium_replacement_delay
+      module: tasks.medium_replacement_delay.grader
       function: grade
   - id: hard_account_takeover
     name: Account takeover with fraudulent purchases
@@ -31,7 +31,7 @@ tasks:
     difficulty: hard
     max_steps: 4
     grader:
-      module: graders.hard_account_takeover
+      module: tasks.hard_account_takeover.grader
       function: grade
 grader:
   module: graders

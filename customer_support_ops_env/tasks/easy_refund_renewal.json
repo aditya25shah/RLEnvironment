@@ -3,9 +3,9 @@
   "id": "easy_refund_renewal",
   "difficulty": "easy",
   "title": "Billing refund for accidental renewal",
-  "grader": "graders.easy_refund_renewal:grade",
+  "grader": "tasks.easy_refund_renewal.grader:grade",
   "grader_name": "grade_easy_refund_renewal",
-  "grader_module": "graders.easy_refund_renewal",
+  "grader_module": "tasks.easy_refund_renewal.grader",
   "grader_function": "grade",
   "constraints": [
     "Route billing cases to the billing queue.",
