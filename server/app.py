@@ -87,6 +87,30 @@ def _task_rows() -> list[dict[str, object]]:
     return tasks
 
 
+def _task_manifest_rows() -> list[dict[str, object]]:
+    """Build a single canonical manifest shape for validator-facing endpoints."""
+    rows: list[dict[str, object]] = []
+    for task in _task_rows():
+        rows.append(
+            {
+                "task_id": task["task_id"],
+                "id": task["id"],
+                "title": task["title"],
+                "description": task["description"],
+                "difficulty": task["difficulty"],
+                "max_steps": task["max_steps"],
+                "has_grader": task["has_grader"],
+                "grader": task["grader"],
+                "grader_name": task["grader_name"],
+                "grader_module": task["grader_module"],
+                "grader_function": task["grader_function"],
+                "grader_file": task["grader_file"],
+                "task_file": task["task_file"],
+            }
+        )
+    return rows
+
+
 def _load_manifest(relative_path: str) -> dict[str, object]:
     manifest_path = Path(__file__).resolve().parents[1] / relative_path
     return json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -100,10 +124,23 @@ def list_tasks() -> dict[str, list[dict[str, object]]]:
 
 @app.get("/task_manifest.json")
 @app.get("/task_manifest")
-@app.get("/tasks/manifest.json")
 def task_manifest() -> dict[str, object]:
     """Expose a static-style task manifest for validators that inspect JSON files."""
-    return _load_manifest("task_manifest.json")
+    return {
+        "env_name": "customer_support_ops_env",
+        "num_tasks": len(TASK_ORDER),
+        "tasks": _task_manifest_rows(),
+    }
+
+
+@app.get("/tasks/manifest.json")
+def tasks_manifest() -> dict[str, object]:
+    """Expose the richer tasks manifest with file-level task and grader metadata."""
+    return {
+        "env_name": "customer_support_ops_env",
+        "num_tasks": len(TASK_ORDER),
+        "tasks": _task_manifest_rows(),
+    }
 
 
 @app.get("/tasks/{task_id}.json")

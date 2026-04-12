@@ -140,6 +140,14 @@ The repo includes `inference.py`, which:
 - chooses the correct 4-step workflow for each task
 - uses the current observation fields for the `note` and `reply` LLM calls
 
+Required environment variables:
+
+- `API_BASE_URL`: LLM API base URL
+- `MODEL_NAME`: model identifier used for inference
+- `HF_TOKEN`: Hugging Face / API token passed to the OpenAI client
+
+These required variables are also declared in [`openenv.yaml`](./openenv.yaml), and the inference entrypoint is the root-level `inference.py`.
+
 Run it from inside this directory:
 
 ```bash

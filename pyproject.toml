@@ -34,5 +34,8 @@ baseline = "customer_support_ops_env.baseline:main"
 
 [tool.setuptools]
 include-package-data = true
-packages = ["customer_support_ops_env", "customer_support_ops_env.server"]
-package-dir = { "customer_support_ops_env" = ".", "customer_support_ops_env.server" = "server" }
+packages = [
+    "customer_support_ops_env",
+    "customer_support_ops_env.server",
+    "customer_support_ops_env.graders",
+]

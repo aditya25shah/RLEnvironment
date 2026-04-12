@@ -35,3 +35,11 @@ grader:
   function: grade_task
 metadata:
   description: Deterministic customer support operations environment with 3 graded tasks
+  required_env_vars:
+    - API_BASE_URL
+    - MODEL_NAME
+    - HF_TOKEN
+  inference_env_defaults:
+    API_BASE_URL: https://router.huggingface.co/v1
+    MODEL_NAME: Qwen/Qwen2.5-72B-Instruct
+  inference_entrypoint: inference.py
