@@ -1,13 +1,18 @@
 {
   "task_id": "easy_refund_renewal",
   "id": "easy_refund_renewal",
+  "env_name": "customer_support_ops_env",
   "has_grader": true,
   "difficulty": "easy",
   "title": "Billing refund for accidental renewal",
+  "description": "A customer was charged for a renewal after canceling and needs a compliant refund workflow.",
+  "max_steps": 4,
   "grader": "graders.easy_refund_renewal:grade",
   "grader_name": "grade_easy_refund_renewal",
   "grader_module": "graders.easy_refund_renewal",
   "grader_function": "grade",
+  "task_file": "tasks/easy_refund_renewal.json",
+  "grader_file": "graders/easy_refund_renewal.py",
   "constraints": [
     "Route billing cases to the billing queue.",
     "Use high priority for customer-impacting billing errors.",

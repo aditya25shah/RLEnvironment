@@ -116,42 +116,7 @@ def _load_manifest(relative_path: str) -> dict[str, object]:
     return json.loads(manifest_path.read_text(encoding="utf-8"))
 
 
-@app.get("/tasks")
-def list_tasks() -> dict[str, list[dict[str, object]]]:
-    """List all available tasks and whether a grader exists for each."""
-    return {"tasks": _task_rows()}
-
-
-@app.get("/task_manifest.json")
-@app.get("/task_manifest")
-def task_manifest() -> dict[str, object]:
-    """Expose a static-style task manifest for validators that inspect JSON files."""
-    return {
-        "env_name": "customer_support_ops_env",
-        "num_tasks": len(TASK_ORDER),
-        "tasks": _task_manifest_rows(),
-    }
-
-
-@app.get("/tasks/manifest.json")
-def tasks_manifest() -> dict[str, object]:
-    """Expose the richer tasks manifest with file-level task and grader metadata."""
-    return {
-        "env_name": "customer_support_ops_env",
-        "num_tasks": len(TASK_ORDER),
-        "tasks": _task_manifest_rows(),
-    }
-
-
-@app.get("/tasks/{task_id}.json")
-def task_json(task_id: str) -> dict[str, object]:
-    """Expose task JSON files directly for validators that fetch them over HTTP."""
-    return _load_manifest(f"tasks/{task_id}.json")
-
-
-@app.get("/validate")
-def validate() -> dict[str, object]:
-    """Return a compact self-check payload for hackathon validators."""
+def _validator_summary() -> dict[str, object]:
     tasks = _task_rows()
     task_ids = [task["task_id"] for task in tasks]
     graded_tasks = [task for task in tasks if task["grader_name"]]
@@ -173,6 +138,54 @@ def validate() -> dict[str, object]:
         "tasks": tasks,
         "env_name": "customer_support_ops_env",
     }
+
+
+@app.get("/tasks")
+@app.get("/tasks.json")
+def list_tasks() -> dict[str, list[dict[str, object]]]:
+    """List all available tasks and whether a grader exists for each."""
+    return {"tasks": _task_rows()}
+
+
+@app.get("/task_manifest.json")
+@app.get("/task_manifest")
+@app.get("/task-manifest.json")
+@app.get("/manifest.json")
+@app.get("/manifest")
+def task_manifest() -> dict[str, object]:
+    """Expose a static-style task manifest for validators that inspect JSON files."""
+    return {
+        "env_name": "customer_support_ops_env",
+        "num_tasks": len(TASK_ORDER),
+        "tasks": _task_manifest_rows(),
+    }
+
+
+@app.get("/tasks/manifest.json")
+@app.get("/tasks/manifest")
+def tasks_manifest() -> dict[str, object]:
+    """Expose the richer tasks manifest with file-level task and grader metadata."""
+    return {
+        "env_name": "customer_support_ops_env",
+        "num_tasks": len(TASK_ORDER),
+        "tasks": _task_manifest_rows(),
+    }
+
+
+@app.get("/tasks/{task_id}.json")
+def task_json(task_id: str) -> dict[str, object]:
+    """Expose task JSON files directly for validators that fetch them over HTTP."""
+    return _load_manifest(f"tasks/{task_id}.json")
+
+
+@app.get("/validate")
+@app.get("/validate.json")
+@app.get("/validator")
+@app.get("/validator.json")
+@app.get("/self_check")
+def validate() -> dict[str, object]:
+    """Return a compact self-check payload for hackathon validators."""
+    return _validator_summary()
 
 
 def main(host: str = "0.0.0.0", port: int = 8000):
