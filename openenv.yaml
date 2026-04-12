@@ -5,7 +5,7 @@ openenv_version: "0.2.2"
 description: Deterministic customer support operations environment with 3 graded tasks
 type: space
 runtime: fastapi
-app: customer_support_ops_env.server.app:app
+app: server.app:app
 port: 8000
 max_episode_steps: 4
 tasks:
@@ -15,23 +15,23 @@ tasks:
     difficulty: easy
     max_steps: 4
     has_grader: true
-    grader: "customer_support_ops_env.graders.easy_refund_renewal:grade"
+    grader: "graders.easy_refund_renewal:grade"
   - id: medium_replacement_delay
     name: Replacement for VIP shipment error
     description: A Premier customer received the wrong item and needs an overnight replacement before an event.
     difficulty: medium
     max_steps: 4
     has_grader: true
-    grader: "customer_support_ops_env.graders.medium_replacement_delay:grade"
+    grader: "graders.medium_replacement_delay:grade"
   - id: hard_account_takeover
     name: Account takeover with fraudulent purchases
     description: A customer reports an account takeover, exported contacts, and unauthorized purchases requiring escalation.
     difficulty: hard
     max_steps: 4
     has_grader: true
-    grader: "customer_support_ops_env.graders.hard_account_takeover:grade"
+    grader: "graders.hard_account_takeover:grade"
 grader:
-  module: customer_support_ops_env.graders
+  module: graders
   function: grade_task
 metadata:
   description: Deterministic customer support operations environment with 3 graded tasks

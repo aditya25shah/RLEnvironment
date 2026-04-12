@@ -10,3 +10,4 @@ __pycache__/
 *.egg-info/
 outputs/
 tmp_openenv_probe/
+customer_support_ops_env/
